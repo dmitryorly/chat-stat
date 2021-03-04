@@ -1,0 +1,100 @@
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+
+:root {
+    --bgc: #262725;
+    --primary-color: #253235;
+}
+
+html {
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    color: #ffffff;
+    background-color: var(--bgc,#262725);
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2em;
+}
+
+.visually-hidden {
+    position: absolute;
+    clip: rect(0 0 0 0);
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+}
+
+.btn {
+    display: inline-block;
+    padding: .5em 1em;
+
+    background-color: #c34e4e;
+    border: 5px solid #b95252;
+    cursor: pointer;
+    font-size: inherit;
+    color: currentColor;
+}
+
+.btn:active {
+    background-color: #b95252;
+}
+
+.filter {
+    display: flex;
+    flex-direction: column;
+}
+
+.filter:not(:last-child) {
+    margin-bottom: 1em;
+}
+
+.filter__title {
+    margin-bottom: 0.5em;
+}
+
+.filter__input {
+    padding: 0.3em;
+    font-size: inherit;
+    border: 0;
+}
+
+.section {
+    margin-top: 2em;
+    background-color: var(--primary-color, #253235);
+    padding: 2em;
+}
+
+.info__out {
+    display: inline-block;
+}
+
+.table {
+    min-width: 100%;
+}
+
+.table td {
+    padding: .6em;
+
+    background-color: var(--bgc,#262725);
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    border-color: var(--primary-color, #253235);
+}
+
+.table caption {
+    font-size: 1.2em;
+    padding: .6em;
+}
