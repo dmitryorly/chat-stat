@@ -13,66 +13,76 @@
     <div class="container">
         <form action="#">
             <div class="btns">
-                <label class="btn">
-                    <input class="visually-hidden" type="file" name="file" data-file-input>
+                <input id="file" class="visually-hidden" type="file" name="file" data-file-input>
+                <label for="file" class="btn">
                     Выбрать файл
                 </label>
 
-                <button class="btn" data-btn="submit">Анализ</button>
+                <button class="btn" disabled data-btn="submit">Анализ</button>
             </div>
 
-            <div class="section info">
-                <div class="info__block">
-                    <div class="info__caption">Данные о файле:</div>
+            <div class="row">
+                <div class="col">
+                    <div class="section info">
+                        <div class="info__block">
+                            <div class="info__caption">Данные о файле:</div>
+        
+                            <ul class="info__list">
+                                <li class="info__list-item">
+                                    Имя файла:&nbsp;<span class="info__out" data-file-out="name"></span>
+                                </li>
+        
+                                <li class="info__list-item">
+                                    Размер файла:&nbsp;<span class="info__out" data-file-out="size"></span>
+                                </li>
+        
+                                <li class="info__list-item">
+                                    Тип файла:&nbsp;<span class="info__out" data-file-out="type"></span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
 
-                    <ul class="info__list">
-                        <li class="info__list-item">
-                            Имя файла:&nbsp;<span class="info__out" data-file-out="name"></span>
-                        </li>
-
-                        <li class="info__list-item">
-                            Размер файла:&nbsp;<span class="info__out" data-file-out="size"></span>
-                        </li>
-
-                        <li class="info__list-item">
-                            Тип файла:&nbsp;<span class="info__out" data-file-out="type"></span>
-                        </li>
-                    </ul>
+                <div class="col">
+                    <div class="section info">
+                        <div class="info__block">
+                            <div class="info__caption">Данные о чате</div>
+        
+                            <ul class="info__list">
+                                <li class="info__list-item">
+                                    Собеседник:&nbsp;<span class="info__out" data-chat-out="name"></span>
+                                </li>
+        
+                                <li class="info__list-item">
+                                    Количество сообщений:&nbsp;<span class="info__out" data-chat-out="count"></span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+        
                 </div>
             </div>
+
+            
 
             <div class="section filters">
                 <label class="filter">
                     <span class="filter__title">Минимальное количество символов в слове</span>
-                    <input type="number" class="filter__input" placeholder="2" min="0" step="1" data-filter="min">
+                    <input type="number" class="filter__input" value="5" min="0" step="1" data-filter="min">
                 </label>
 
                 <label class="filter">
-                    <span class="filter__title">Игнорируемые слова (разделенные пробелом)</span>
+                    <span class="filter__title">Игнорируемые слова (через пробел)</span>
                     <input type="text" class="filter__input" placeholder="тут нас вас" data-filter="exclude">
                 </label>
 
                 <button class="btn" data-btn="filters">Применить</button>
             </div>
 
-            <div class="section info">
-                <div class="info__block">
-                    <div class="info__caption">Данные о чате</div>
+            <div class="section chart" data-chart></div>
 
-                    <ul class="info__list">
-                        <li class="info__list-item">
-                            Собеседник:&nbsp;<span class="info__out" data-chat-out="name"></span>
-                        </li>
-
-                        <li class="info__list-item">
-                            Количество сообщений:&nbsp;<span class="info__out" data-chat-out="count"></span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="section chart" data-chart>
-            </div>
+            <div class="section cloud" data-cloud></div>
         </form>
     </div>
 

@@ -12,15 +12,11 @@ function sortWordsByCount(words) {
     return sortable.sort((a, b) => b[1] - a[1])
 }
 
-// TODO Принимать массив, чтобы избавиться от split и join
-function min(str, min) {
-    if (!min) return str
-    return str.split(' ').filter(word => word.length > min).join(' ')
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
 }
 
-function exclude(str, excludes) {
-    if (!excludes || !excludes.length) return str
-    return str.split(' ').filter(word => !excludes.includes(word)).join(' ')
-}
-
-export { createElement, sortWordsByCount, min, exclude }
+export { createElement, sortWordsByCount, shuffleArray }

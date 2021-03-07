@@ -4,10 +4,6 @@ class FileInfo {
         this.sizeOut = document.querySelector('[data-file-out="size"]')
         this.typeOut = document.querySelector('[data-file-out="type"]')
     }
-
-    method() {
-        console.log(1);
-    }
 }
 
 FileInfo.prototype.render = function (data) {

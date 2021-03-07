@@ -13,7 +13,7 @@ let input = document.querySelector('[data-file-input]')
 let submitBtn = document.querySelector('[data-btn="submit"]')
 let fileInfo = new FileInfo
 let chatInfo = new ChatInfo
-let filters = new Filters({data: app.data})
+let filters = new Filters({ data: app.data })
 let fr = new FileReader()
 
 fr.addEventListener('load', onLoad)
@@ -23,34 +23,31 @@ submitBtn.addEventListener('click', onClick)
 function onChange() {
     if (!this.files.length) return
     let file = this.files[0]
-    app.data.source = file
 
     fileInfo.render(file)
+    fr.readAsText(file)
 }
 
 function onLoad(e) {
     let result = JSON.parse(e.target.result)
-    console.log(result);
     let messages = result.messages
     let name = result.name
 
-    app.data.getDataFromJSON(result)
+    app.data.name = name
+    app.data.messagesCount = messages.length
+    app.data.source = result
 
-    chatInfo.render({
-        name,
-        count: messages.length,
-        table: {
-            el: document.querySelector('[data-chart]'),
-            caption: 'Самые частые слова',
-            messages: app.data.unique,
-            messagesCount: 5,
-            className: 'table'
-        }
-    })
+    submitBtn.removeAttribute('disabled')
 }
 
 function onClick(e) {
     e.preventDefault()
     if (!app.data.source) return
-    fr.readAsText(app.data.source)
+    app.data.getDataFromJSON(app.data.source)
+    
+    if (filters.enabled) {
+        filters.applyFilters()
+    } else {
+        chatInfo.render()
+    }
 }

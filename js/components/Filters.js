@@ -1,19 +1,22 @@
-import { min, exclude } from '../utils'
+import format from './format'
 
 class Filters {
     constructor(options) {
         this.data = options.data
-        console.log(options);
         this.minInput = document.querySelector('[data-filter="min"]')
         this.excludeInput = document.querySelector('[data-filter="exclude"]')
         this.applyBtn = document.querySelector('[data-btn="filters"]')
 
-        this.minValue = this.getMinValue()
-        this.excludeValue = this.getExcludeValue()
+        this.getMinValue()
+        this.getExcludeValue()
 
         this.minInput.addEventListener('change', this.getMinValue.bind(this))
-        this.excludeInput.addEventListener('change', this.getExcludeValue.bind(this))
+        this.excludeInput.addEventListener('input', this.getExcludeValue.bind(this))
         this.applyBtn.addEventListener('click', this.onClick.bind(this))
+    }
+
+    get enabled() {
+        return !!(this.minValue || this.excludeValue.length)
     }
 
     getMinValue() {
@@ -21,38 +24,49 @@ class Filters {
     }
 
     getExcludeValue() {
-        // TODO использовать format.js
-        this.excludeValue = this.excludeInput.value.split(' ').filter(s => !!s)
+        this.excludeValue = format(this.excludeInput.value).split(' ').filter(s => !!s)
     }
 
     onClick(e) {
         e.preventDefault()
-        console.log(this);
         this.applyFilters()
     }
 
     applyFilters() {
-        if (!this.data || !this.data.raw) {
+        let byPerson = this.data.byPerson
+        if (!byPerson) {
             console.warn('No data to filter')
             return
         }
 
-        if (!this.minValue && !this.excludeValue) return
+        if (!this.enabled) return
 
-        let filtered = {}
-        let raw = Object.assign(this.data.raw)
+        for (let person in byPerson) {
+            let sorted = byPerson[person].sortedUnique
+            let filtered = []
 
-        // for (let person in raw) {
-        //     for (let word in person) {
-                
-        //     }
-        // }
+            for (let word of sorted) {
+                let str = word[0]
+                if (this.min(str) && this.exclude(str)) {
+                    filtered.push(word)
+                }
+            }
 
-        console.log(filtered);
+            byPerson[person].filtered = filtered
+        }
+
+        window.dispatchEvent(new Event('filter'))
     }
 
-    min(str) { return min(str, this.minValue) }
-    exclude(str) { return exclude(str, this.excludeValue) }
+    min(str) { 
+        if (this.minValue) return str.length > this.minValue
+        return true
+    }
+
+    exclude(str) { 
+        if (this.excludeValue && this.excludeValue.length) return !this.excludeValue.includes(str)
+        return true
+    }
 }
 
 export default Filters
