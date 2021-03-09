@@ -2,6 +2,7 @@ import FileInfo from './components/FileInfo'
 import ChatInfo from './components/ChatInfo'
 import Data from './components/Data'
 import Filters from './components/Filters'
+import Cloud from './components/Cloud'
 
 const app = {
     data: new Data
@@ -15,6 +16,7 @@ let fileInfo = new FileInfo
 let chatInfo = new ChatInfo
 let filters = new Filters({ data: app.data })
 let fr = new FileReader()
+let cloud = new Cloud()
 
 fr.addEventListener('load', onLoad)
 input.addEventListener('change', onChange)
@@ -44,10 +46,6 @@ function onClick(e) {
     e.preventDefault()
     if (!app.data.source) return
     app.data.getDataFromJSON(app.data.source)
-    
-    if (filters.enabled) {
-        filters.applyFilters()
-    } else {
-        chatInfo.render()
-    }
+
+    filters.applyFilters()
 }
