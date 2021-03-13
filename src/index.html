@@ -69,12 +69,12 @@
             <div class="section filters">
                 <label class="filter">
                     <span class="filter__title">Минимальное количество символов в слове</span>
-                    <input type="number" class="filter__input" value="5" min="0" step="1" data-filter="min">
+                    <input type="number" class="filter__input" value="3" min="0" step="1" data-filter="min">
                 </label>
 
                 <label class="filter">
                     <span class="filter__title">Игнорируемые слова (через пробел)</span>
-                    <input type="text" class="filter__input" placeholder="тут нас вас" data-filter="exclude">
+                    <input type="text" class="filter__input" placeholder="и в с на" data-filter="exclude">
                 </label>
 
                 <button class="btn" data-btn="filters">Применить</button>
@@ -84,6 +84,12 @@
 
             <div class="section cloud" data-cloud></div>
         </form>
+    </div>
+
+    <div class="modals">
+        <div class="modal controls" data-cloud-controls>
+            
+        </div>
     </div>
 
     <!-- <script src="src/js/main.js"></script> -->

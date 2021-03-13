@@ -13,7 +13,7 @@ class ChatInfo {
             count: app.data.messagesCount,
             table: {
                 el: document.querySelector('[data-chart]'),
-                caption: 'Самые частые слова',
+                caption: 'Частота слов',
                 messages: app.data.byPerson,
                 messagesCount: 5,
                 className: 'table'
