@@ -1,10 +1,10 @@
 
-import * as d3 from 'd3'
+import * as d3Select from 'd3-selection'
 import cloud from 'd3-cloud'
 
 export default class Cloud {
     constructor() {
-        this.vis = d3.select("[data-cloud]").append("svg")
+        this.vis = d3Select.select("[data-cloud]").append("svg")
         this.wordsCount = 20
 
         window.addEventListener('filter', this.init.bind(this))
@@ -103,6 +103,6 @@ export default class Cloud {
 
         console.log(data)
 
-        // let controls = d3.select('[data-cloud-controls]')
+        // let controls = d3Select.select('[data-cloud-controls]')
     }
 }
